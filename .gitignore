@@ -1,5 +1,4 @@
-data.zip
-accuracy.csv
+
 data/*
 __pycache__/dataset.cpython-39.pyc
 __pycache__/network.cpython-39.pyc
@@ -8,3 +7,6 @@ __pycache__/train.cpython-39.pyc
 resnet_model_9.pth
 vit_model_9.pth
 .vscode
+confusion_matrix.png
+output/*
+accuracy/*

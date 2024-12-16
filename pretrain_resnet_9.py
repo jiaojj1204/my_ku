@@ -6,11 +6,11 @@ import torch.optim as optim
 from train import train  
 
 def main():
-    class_list = ['00_写实', '01_变形', '02_想象', '03_色彩丰富', '04_色彩对比', '05_线条组合', '06_线条质感', '08_构图能力', '09_转化能力']
+    class_list = ['0_写实', '1_变形', '2_想象', '3_色彩丰富', '4_色彩对比', '5_线条组合', '6_线条质感', '8_构图能力', '9_转化能力']
     # 以下是通过Data_dataloader函数输入为：数据的路径，数据大小，batch的大小，有几线并用 （把dataset和Dataloader功能合在了一起）
-    train_loader = data_dataloader(data_path='./data/train', size=224, batch_size=24, num_workers=4,classes = class_list)
-    val_loader = data_dataloader(data_path='./data/val', size=224, batch_size=24, num_workers=2, classes = class_list)
-    test_loader = data_dataloader(data_path='./data/test', size=224, batch_size=24, num_workers=2, classes = class_list)
+    train_loader = data_dataloader(data_path='./output/train', size=224, batch_size=24, num_workers=4,classes = class_list)
+    val_loader = data_dataloader(data_path='./output/val', size=224, batch_size=24, num_workers=2, classes = class_list)
+    test_loader = data_dataloader(data_path='./output/test', size=224, batch_size=24, num_workers=2, classes = class_list)
 
     # 以下是超参数的定义
     lr = 1e-3           #学习率

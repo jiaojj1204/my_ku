@@ -57,13 +57,13 @@ def train(model,optimizer,loss_function,train_data,val_data,test_data,epochs,dev
             if val_acc > best_acc:  #判断每次在验证集上的准确率是否为最大
                 best_epoch = epoch
                 best_acc = val_acc
-                torch.save(model.state_dict(), 'vit_model_9.pth')   #保存验证集上最大的准确率
+                torch.save(model.state_dict(), 'new_resnet_model_9.pth')   #保存验证集上最大的准确率
 
     print('===========================分割线===========================')
     print('best acc:',best_acc,'best_epoch:',best_epoch)
 
     #在测试集上检测训练好后模型的准确率
-    model.load_state_dict((torch.load('vit_model_9.pth')))
+    model.load_state_dict((torch.load('new_resnet_model_9.pth')))
     print('detect the test data!')
     test_acc = evaluate(model,test_data,device=device)
     print('test_acc:',test_acc)
@@ -77,7 +77,7 @@ def train(model,optimizer,loss_function,train_data,val_data,test_data,epochs,dev
     while os.path.exists(file_name):
         file_name = f'accuracy_{file_index}.csv'
         file_index += 1
-    df.to_csv(file_name, index=False)
+    df.to_csv(os.path.join("./accuracy", file_name), index=False)
 
 #测试
 def main():
