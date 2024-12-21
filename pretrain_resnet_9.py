@@ -9,9 +9,9 @@ from new_train import train
 def main():
     class_list = ['0_写实', '1_变形', '2_想象', '3_色彩丰富', '4_色彩对比', '5_线条组合', '6_线条质感', '8_构图能力', '9_转化能力']
     # 以下是通过Data_dataloader函数输入为：数据的路径，数据大小，batch的大小，有几线并用 （把dataset和Dataloader功能合在了一起）
-    train_loader = data_dataloader(data_path='./output/train', size=224, batch_size=24, num_workers=4,classes = class_list)
-    val_loader = data_dataloader(data_path='./output/val', size=224, batch_size=24, num_workers=2, classes = class_list)
-    test_loader = data_dataloader(data_path='./output/test', size=224, batch_size=24, num_workers=2, classes = class_list)
+    train_loader = data_dataloader(data_path='./data_select/train', size=224, batch_size=24, num_workers=4,classes = class_list)
+    val_loader = data_dataloader(data_path='./data_select/val', size=224, batch_size=24, num_workers=2, classes = class_list)
+    test_loader = data_dataloader(data_path='./data_select/test', size=224, batch_size=24, num_workers=2, classes = class_list)
 
     # 以下是超参数的定义
     lr = 1e-4         #学习率
@@ -24,13 +24,13 @@ def main():
     ResNet50.fc = nn.Linear(ResNet50.fc.in_features, 9)  # 修改全连接层
     ResNet50 = ResNet50.to(device)
     
-    # 3. 冻结所有层的参数，除了最后一层（fc层）
-    for param in ResNet50.parameters():
-        param.requires_grad = False  # 冻结所有参数
+    # # 3. 冻结所有层的参数，除了最后一层（fc层）
+    # for param in ResNet50.parameters():
+    #     param.requires_grad = False  # 冻结所有参数
 
-    # 仅训练最后一层的参数
-    for param in ResNet50.fc.parameters():
-        param.requires_grad = True  # 解冻最后一层的参数
+    # # 仅训练最后一层的参数
+    # for param in ResNet50.fc.parameters():
+    #     param.requires_grad = True  # 解冻最后一层的参数
 
     optimizer = optim.Adam(ResNet50.parameters(), lr=lr)  # 优化器
     loss_function = nn.CrossEntropyLoss()  # 损失函数
@@ -38,7 +38,7 @@ def main():
     
     # 训练以及验证测试函数
     train(model= ResNet50, optimizer=optimizer, loss_function=loss_function, train_loader=train_loader, val_loader=val_loader, 
-          test_loader=test_loader, epochs= epochs, device=device, save_dir="./accuary", model_name="new_resnet_9.pth")
+          test_loader=test_loader, epochs= epochs, device=device, save_dir="./accuracy", model_name="new_resnet_9_full_training.pth")
 
 if __name__ == '__main__':
     main()

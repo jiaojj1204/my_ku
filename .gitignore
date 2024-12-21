@@ -10,3 +10,4 @@ vit_model_9.pth
 confusion_matrix.png
 output/*
 accuracy/*
+data_select/*
