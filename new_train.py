@@ -76,3 +76,5 @@ def train(model, optimizer, loss_function, train_loader, val_loader, test_loader
         file_name = f'accuracy_{file_index}.csv'
         file_index += 1
     df.to_csv(os.path.join(save_dir, file_name), index=False)
+
+    return best_acc
